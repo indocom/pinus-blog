@@ -12,12 +12,16 @@
     "@contentful/rich-text-react-renderer": "^15.3.6",
     "@reduxjs/toolkit": "^1.6.1",
     "contentful": "^9.0.0",
+    "firebase": "^9.1.2",
     "next": "11.1.2",
     "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-feather": "^2.0.9",
-    "react-redux": "^7.2.5"
+    "react-redux": "^7.2.5",
+    "react-redux-firebase": "^3.10.0",
+    "save": "^2.4.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@types/react": "17.0.20",

@@ -11,6 +11,7 @@ const NavBar: NextPage = () => {
         <div>
           <a href="/admin" className="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Admin</a>
           <a href="/try_redux" className="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Try_Redux</a>
+          <a href="/try_firebase" className="text-lg no-underline text-grey-darkest hover:text-blue-dark ml-2">Try_Firebase</a>
         </div>
         </nav>
     );

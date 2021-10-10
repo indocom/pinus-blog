@@ -10,7 +10,6 @@ import { createWrapper } from "next-redux-wrapper";
 class ClientApp extends App {
   render() {
     const { Component, pageProps }: AppProps = this.props;
-
     return (
       <Provider store={store}>
         <Layout>
@@ -26,5 +25,3 @@ const makeStore = () => store;
 const wrapper = createWrapper(makeStore);
 
 export default wrapper.withRedux(ClientApp);
-
-// export default MyApp
