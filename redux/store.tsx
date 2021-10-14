@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import counterReducer from "./dummy_counter"
-import dummy_names from "./dummy_names";
+import dummy_names from "./dummy_names"
+import firebase from "./firebase"
 
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
         names: dummy_names,
+        firebase: firebase,
     }
 });
 

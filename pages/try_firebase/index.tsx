@@ -2,11 +2,18 @@ import type { NextPage } from 'next'
 import 'tailwindcss/tailwind.css'
 import React, { useState } from 'react'
 import { initFirebase } from "../../firebase";
-import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
+import { useDispatch, useSelector } from "react-redux"
+import { getAuth, signInWithEmailAndPassword, signOut } from '@firebase/auth';
+import { RootState } from "../../redux/store"
+import { log_in, log_out } from "../../redux/firebase"
 
 const  Sign_In: NextPage = () => {
 
-    const [state, setState] = useState(
+    const { logged_in, email } = useSelector((state: RootState) => state.firebase);
+
+    const dispatch = useDispatch();
+
+    const [details, setDetails] = useState(
         {
             email: "",
             password: '',
@@ -14,27 +21,38 @@ const  Sign_In: NextPage = () => {
     );
 
     const handleChange = (e : React.FormEvent<HTMLInputElement>): void => {
-        setState({
-            ...state, [e.currentTarget.id]: e.currentTarget.value
+        setDetails({
+            ...details, [e.currentTarget.id]: e.currentTarget.value
         })
     }
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        let email = state["email"];
-        let password = state["password"];
-
         const app = initFirebase();
         const auth = getAuth(app);
 
-        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            console.log("success");
+        signInWithEmailAndPassword(auth, details["email"], details["password"]).then((userCredential) => {
+            const temp = userCredential.user.email === null ? "" : userCredential.user.email;
+            dispatch(log_in(temp));
         }).catch((error) => {
             console.log(error);
             console.log("failll");
         })
       };
+
+      const logout = async () =>  {
+
+        const app = initFirebase();
+        const auth = getAuth(app);
+        
+        signOut(auth).then(() => {
+            dispatch(log_out());
+        }).catch((error) => {
+            console.log(error);
+            console.log("failll");
+        })
+      }
 
     return (
         <div className="p-5">
@@ -52,6 +70,8 @@ const  Sign_In: NextPage = () => {
             <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Login</button>
             </div>
         </form>
+        <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" onClick={logout}>Logout</button>
+        {logged_in && <div> You are logged in! </div>}
         </div>
     );
 }
