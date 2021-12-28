@@ -5,6 +5,7 @@ import React from 'react'
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
 import { createWrapper } from "next-redux-wrapper";
+import Page from '../components/Page';
 
 // default component from Next JS
 class ClientApp extends App {
@@ -12,9 +13,12 @@ class ClientApp extends App {
     const { Component, pageProps }: AppProps = this.props;
     return (
       <Provider store={store}>
-        <Layout>
+        {/* <Layout>
           <Component {...pageProps} />
-        </Layout>
+        </Layout> */}
+        <Page title='PINUS Tech' children={
+          <Component {...pageProps}/>
+        }/>
       </Provider>
     );
   }
